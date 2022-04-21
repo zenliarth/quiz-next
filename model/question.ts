@@ -12,8 +12,8 @@ export default class QuestionModel {
     id: number,
     question: string,
     answers: AnswerModel[],
-    isAnswered?: boolean,
     isCorrectAnswer = false,
+    isAnswered?: boolean,
   ) {
     this.#id = id;
     this.#text = question;
@@ -78,13 +78,26 @@ export default class QuestionModel {
     );
   }
 
+  static createObjectFrom(object: QuestionModel): QuestionModel {
+    const answers = object.answers.map((answer) =>
+      AnswerModel.createFromObject(answer),
+    );
+    return new QuestionModel(
+      object.id,
+      object.text,
+      answers,
+      object.isCorrectAnswer,
+      object.isAnswered,
+    );
+  }
+
   toObject() {
     return {
       id: this.#id,
       text: this.#text,
       answers: this.#answers.map((answer) => answer.toObject()),
-      isCorrectAnswer: this.isCorrectAnswer,
-      isAnswered: this.isAnswered,
+      isCorrectAnswer: this.#isCorrectAnswer,
+      isAnswered: this.#isAnswered,
     };
   }
 }

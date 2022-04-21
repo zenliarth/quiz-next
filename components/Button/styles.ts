@@ -1,19 +1,20 @@
 import styled from 'styled-components';
 
 export const Btn = styled.button`
-    background-color: #9885f0;
+    // background-color: #9885f0;
+    width: 30%;
+    margin: 0 auto;
+    background-color: #fff;
     border-radius: 8px;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 1.2rem;
-    border: none;
-    padding: 10px 25px;
+    border: 1px solid #9885f0;
+    padding: 10px 35px;
     margin-top: 30px;
-    
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
     &:hover {
-        background-color: #8f7ce3;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+        transform: scale(1.05);
     }
 `;

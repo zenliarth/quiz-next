@@ -1,52 +1,85 @@
-import { useState } from 'react';
-import Button from '../components/Button';
-import Question from '../components/Question/index';
-import AnswerModel from '../model/answer';
+import { useEffect, useState } from 'react';
 import QuestionModel from '../model/question';
+import QuestionList from './../components/QuestionList/index';
 import { Container } from './style';
-
-const questionMock = new QuestionModel(1, 'What is the best language?', [
-  AnswerModel.isRightAnswer('Javascript'),
-  AnswerModel.isWrongAnswer('PHP'),
-  AnswerModel.isWrongAnswer('Java'),
-  AnswerModel.isWrongAnswer('C#'),
-]);
+import { useRouter } from 'next/router';
 
 export default function Home() {
-  const [question, setQuestion] = useState(questionMock);
+  const router = useRouter();
 
-  // using ref to get question current
-  /* const questionRef = useRef<QuestionModel>();
+  const [questionIds, setQuestionIds] = useState<number[]>([]);
+  const [question, setQuestion] = useState<QuestionModel>();
+  const [correctAnswers, setCorrectAnswers] = useState<number>(0);
+
+  async function getQuestionIds() {
+    const response = await fetch(`http://localhost:3000/api/questionsList`);
+    const ids = await response.json();
+    setQuestionIds(ids);
+  }
+
+  async function getQuestion(questionId: number) {
+    const response = await fetch(
+      `http://localhost:3000/api/questions/${questionId}`,
+    );
+    const json = await response.json();
+    const newQuestion = QuestionModel.createObjectFrom(json);
+    setQuestion(newQuestion);
+  }
+
+  function answeredQuestion(answeredQuestion: QuestionModel) {
+    setQuestion(answeredQuestion);
+    const correct = answeredQuestion.isCorrectAnswer;
+    setCorrectAnswers(correctAnswers + (correct ? 1 : 0));
+  }
+
+  function nextQuestionID() {
+    if (question) {
+      const nextQuestionId = questionIds[questionIds.indexOf(question.id) + 1];
+      return nextQuestionId;
+    }
+  }
+
+  function goToNextStep() {
+    const nextQuestion = nextQuestionID();
+    if (nextQuestion) {
+      goToNextQuestion(nextQuestion);
+    } else {
+      goToResult();
+    }
+  }
+
+  function goToNextQuestion(questionId: number) {
+    getQuestion(questionId);
+  }
+
+  function goToResult() {
+    router.push({
+      pathname: '/result',
+      query: {
+        total: questionIds.length,
+        correctAnswers,
+      },
+    });
+  }
 
   useEffect(() => {
-    questionRef.current = question;
-  }, [question]); */
+    getQuestionIds();
+  }, []);
 
-  /* function timeout(){
-    if(questionRef.current.notIsAnswered){
-      setQuestion(questionRef.current.answerQuestionWith(-1));
+  useEffect(() => {
+    if (questionIds.length > 0) {
+      getQuestion(questionIds[0]);
     }
-  } */
-
-  function onAnswerResponse(index: number) {
-    setQuestion(question.answerQuestionWith(index));
-  }
-
-  function timeout() {
-    if (question.notIsAnswered) {
-      setQuestion(question.answerQuestionWith(-1));
-    }
-  }
+  }, [questionIds]);
 
   return (
     <Container>
-      <Question
-        value={question}
-        timeToAnswer={5}
-        onAnswerResponse={onAnswerResponse}
-        timeout={timeout}
+      <QuestionList
+        question={question}
+        lastQuestion={nextQuestionID() === undefined}
+        answeredQuestion={answeredQuestion}
+        nextStep={goToNextStep}
       />
-      <Button text="Next"/>
     </Container>
   );
 }

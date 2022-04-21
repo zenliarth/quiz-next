@@ -28,7 +28,7 @@ function Question({
   const renderAnswers = () => {
     return value.answers.map((answer, i) => (
       <Answer
-        key={i}
+        key={`${value.id}-${i}`}
         value={answer}
         index={i}
         letter={letters[i].letter}
@@ -41,7 +41,7 @@ function Question({
   return (
     <Container>
       <QuestionText text={value.text} />
-      <Timer duration={timeToAnswer ?? 10} timeout={timeout} />
+      <Timer key={value.id} duration={timeToAnswer ?? 10} timeout={timeout} />
       {renderAnswers()}
     </Container>
   );
