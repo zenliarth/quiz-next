@@ -1,15 +1,14 @@
 import { useRouter } from 'next/router';
-import QuestionText from '../components/QuestionText';
+import QuestionText from '../../components/QuestionText';
 import {
   BoxResult,
-  Container,
   ContainerResult,
   Title,
   BoxItem,
   Text,
   Value,
 } from './style';
-import Button from './../components/Button/index';
+import Button from '../../components/Button/index';
 
 function Result() {
   const router = useRouter();

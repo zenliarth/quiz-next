@@ -1,8 +1,16 @@
 import { useEffect, useState } from 'react';
 import QuestionModel from '../model/question';
 import QuestionList from './../components/QuestionList/index';
-import { Container } from './style';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
 
 export default function Home() {
   const router = useRouter();
