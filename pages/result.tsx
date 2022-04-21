@@ -1,7 +1,8 @@
+import { useRouter } from 'next/router';
+import Button from '../components/Button/index';
 import styled from 'styled-components';
-import props from 'styled-components/macro';
 
-export const ContainerResult = styled.div`
+const ContainerResult = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,7 +10,7 @@ export const ContainerResult = styled.div`
   height: 100vh;
 `;
 
-export const Title = styled.div`
+const Title = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
@@ -19,7 +20,7 @@ export const Title = styled.div`
   margin-top: 100px;
 `;
 
-export const BoxResult = styled.div`
+const BoxResult = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -36,7 +37,7 @@ export const BoxResult = styled.div`
   }
 `;
 
-export const BoxItem = styled.div`
+const BoxItem = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -59,7 +60,7 @@ export const BoxItem = styled.div`
   }
 `;
 
-export const Text = styled.span`
+const Text = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,7 +70,7 @@ export const Text = styled.span`
     font-size: 1.3rem;
   }
 `;
-export const Value = styled.span`
+const Value = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -80,3 +81,37 @@ export const Value = styled.span`
     font-size: 2.5rem;
   }
 `;
+
+
+
+export default function Result() {
+  const router = useRouter();
+  const total = +router.query.total;
+  const correctAnswers = +router.query.correctAnswers;
+  const percentage = Math.round((correctAnswers / total) * 100);
+
+  return (
+    <ContainerResult>
+      <Title>Final Result</Title>
+      <BoxResult>
+        <BoxItem color="#2180b0">
+          <Text>Total Questions</Text>
+          <Value>{total}</Value>
+        </BoxItem>
+        <BoxItem color="#1d9132">
+          <Text>Correct Answers</Text>
+          <Value>{correctAnswers}</Value>
+        </BoxItem>
+        <BoxItem
+          color="
+          #e88000
+          "
+        >
+          <Text>Percentage</Text>
+          <Value>{percentage}%</Value>
+        </BoxItem>
+      </BoxResult>
+      <Button text="Restart" href="/" />
+    </ContainerResult>
+  );
+}
