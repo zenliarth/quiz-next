@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
 export const Btn = styled.button`
-    // background-color: #9885f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 30%;
+    max-width: 200px;
+    min-width: 150px;
     margin: 0 auto;
     background-color: #fff;
     border-radius: 8px;

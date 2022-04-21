@@ -27,6 +27,7 @@ function Answer({
   backgroundColor,
   onAnswerResponse,
 }: AnswerProps) {
+
   return (
     <Container>
       <ContentAnswer onClick={() => onAnswerResponse(index)}>

@@ -1,4 +1,14 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+// make keyframe to rotate div
+const rotate = keyframes`
+  from {
+    transform: rotateY(180deg);
+  }
+  to {
+    transform: rotateY(0deg);
+  }
+`;
 
 export const Container = styled.div`
   display: flex;
@@ -72,6 +82,8 @@ export const CardBack = styled.div`
   transition: 0.3s;
   cursor: pointer;
   position: absolute;
+  animation: ${rotate} 0.5s linear;
+  perspective: 1000px;
   &:hover {
     box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
   }
@@ -105,7 +117,9 @@ export const CorrectAnswer = styled.div`
   background-color: #00b058;
   border-radius: 10px;
   height: 100%;
-
+  animation: ${rotate} 0.5s linear;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 `;
 export const IncorrectAnswer = styled.div`
   display: flex;
@@ -115,4 +129,8 @@ export const IncorrectAnswer = styled.div`
   background-color: crimson;
   border-radius: 10px;
   height: 100%;
+  animation: ${rotate} 0.5s linear;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px ;
 `;
