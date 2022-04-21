@@ -1,6 +1,6 @@
 import questions from '../questionsDatabase';
 
-export default (req, res) => {
+const questionsRoute = (req, res) => {
   const id = +req.query.id;
 
   const filterQuestion = questions.filter((question) => question.id === id);
@@ -12,3 +12,5 @@ export default (req, res) => {
     res.status(200).json(selectedQuestion.toObject());
   }
 };
+
+export default questionsRoute;
