@@ -2,12 +2,11 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import { Container } from './styles';
 
 interface TimerProps {
-  key: any;
   duration: number;
   timeout: () => void;
 }
 
-function Timer({ key, duration, timeout }: TimerProps): JSX.Element {
+function Timer({ duration, timeout }: TimerProps): JSX.Element {
   return (
     <Container>
       <CountdownCircleTimer

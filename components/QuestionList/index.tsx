@@ -28,7 +28,7 @@ function QuestionList({
       {question ? (
         <Question
           value={question}
-          timeToAnswer={6}
+          timeToAnswer={10}
           onAnswerResponse={onAnswerResponse}
           timeout={nextStep}
         />
