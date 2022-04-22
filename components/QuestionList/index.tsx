@@ -1,5 +1,6 @@
 import QuestionModel from '../../model/question';
 import Button from '../Button';
+import Loading from '../Loading';
 import Question from '../Question';
 import { Container } from './styles';
 
@@ -16,7 +17,6 @@ function QuestionList({
   answeredQuestion,
   nextStep,
 }: QuestionListProps) {
-  
   function onAnswerResponse(index: number) {
     if (question.notIsAnswered) {
       answeredQuestion(question.answerQuestionWith(index));
@@ -25,6 +25,7 @@ function QuestionList({
 
   return (
     <Container>
+      <Loading isLoading={question ? false : true} />
       {question ? (
         <Question
           value={question}
