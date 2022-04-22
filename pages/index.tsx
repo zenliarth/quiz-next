@@ -10,10 +10,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-
 `;
-
-const BASE_URL = 'http://localhost:3000/api'
 
 export default function Home() {
   const router = useRouter();
@@ -23,15 +20,13 @@ export default function Home() {
   const [correctAnswers, setCorrectAnswers] = useState<number>(0);
 
   async function getQuestionIds() {
-    const response = await fetch(`${BASE_URL}/questionsList`);
+    const response = await fetch(`${process.env.BASE_URL}/questionsList`);
     const ids = await response.json();
     setQuestionIds(ids);
   }
 
   async function getQuestion(questionId: number) {
-    const response = await fetch(
-      `${BASE_URL}/questions/${questionId}`,
-    );
+    const response = await fetch(`${process.env.BASE_URL}/questions/${questionId}`);
     const json = await response.json();
     const newQuestion = QuestionModel.createObjectFrom(json);
     setQuestion(newQuestion);
