@@ -13,25 +13,25 @@ const rotate = keyframes`
 export const Container = styled.div`
   display: flex;
   width: 100%;
+  height: 80px;
   align-items: center;
   justify-content: center;
-  height: 100px;
 `;
 
 export const ContentAnswer = styled.div`
   display: flex;
   width: 100%;
-  flex: 1;
   position: relative;
   align-items: center;
   justify-content: center;
-  height: 80%;
+  height: 70px;
 `;
 export const CardFront = styled.div`
   display: flex;
   position: absolute;
   align-items: center;
   width: 100%;
+  max-width: 600px;
   min-width: 400px;
   height: 100%;
   background-color: #fff;

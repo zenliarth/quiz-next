@@ -9,7 +9,6 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   width: 100% ;
   max-width: 600px;
   margin: 0 auto;
