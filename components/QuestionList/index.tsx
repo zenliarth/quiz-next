@@ -25,18 +25,22 @@ function QuestionList({
 
   return (
     <Container>
-      <Loading isLoading={question ? false : true} />
       {question ? (
-        <Question
-          value={question}
-          timeToAnswer={10}
-          onAnswerResponse={onAnswerResponse}
-          timeout={nextStep}
-        />
+        <>
+          <Question
+            value={question}
+            timeToAnswer={10}
+            onAnswerResponse={onAnswerResponse}
+            timeout={nextStep}
+          />
+          <Button
+            onClick={nextStep}
+            text={lastQuestion ? 'Finalizar' : 'Next'}
+          />
+        </>
       ) : (
-        false
+        <Loading isLoading={question ? false : true} />
       )}
-      <Button onClick={nextStep} text={lastQuestion ? 'Finalizar' : 'Next'} />
     </Container>
   );
 }
